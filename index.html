@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .chat-container {
+      max-width: 500px;
+      margin: auto;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      overflow: hidden;   
+      background-image: url('https://i.pinimg.com/564x/25/b7/ae/25b7ae0f97aab67342832c7d59677f8b.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-top: 100px;
+    }
+    
+
+.chat-box {
+  padding: 10px;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.chat-message-user {
+  background-color: #f2eded;
+  float: right;
+}
+
+.chat-message-bot {
+  background-color:none;
+  color: rgb(0, 0, 0);
+  float: left;
+}
+
+.chat-input {
+  display: flex;
+  margin-top: 10px;
+}
+
+.chat-input input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.chat-input button[type="button"] {
+  padding: 10px;
+  background-color: #f7c4f0;
+  border: none;
+  color: rgb(16, 1, 1);
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+.chat-message {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  display: inline-block; /* add this property */
+  clear: both; /* add this property to clear the float */
+}
+body {
+  background-image: url("https://w0.peakpx.com/wallpaper/296/179/HD-wallpaper-white-leaves-on-side-with-dark-black-background-black-aesthetic.jpg");
+  background-size: cover;
+}
+
+  </style>
+</head>
+<body>
+  <center>
+  <div class="chat-container">
+    
+    <div class="chat-box" id="chatBox">
+      <div class="chat-message-bot">Hi there! How can I help you?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="Type your message here" id="chatInput" onkeypress="handleKeyPress(event)">
+      <button type="button" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</center>
+  <script>
+    function sendMessage() {
+      var message = document.getElementById("chatInput").value;
+      var chatBox = document.getElementById("chatBox");
+
+      // Create user message element
+      var userMessageElement = document.createElement("div");
+      userMessageElement.innerHTML = message;
+      userMessageElement.classList.add("chat-message", "chat-message-user");
+
+      // Add user message to chat box
+      chatBox.appendChild(userMessageElement);
+
+      // Clear input field
+      document.getElementById("chatInput").value = "";
+
+      // Perform math operation and create bot response
+      var result;
+      try {
+        result = eval(message);
+        var botResponse = "The result is " + result;
+      } catch (error) {
+        var botResponse = "Sorry, I couldn't understand that.";
+      }
+
+      // Create bot message element
+      var botMessageElement = document.createElement("div");
+      botMessageElement.innerHTML = botResponse;
+      botMessageElement.classList.add("chat-message", "chat-message-bot");
+
+      // Add bot message to chat box
+      setTimeout(function() {
+        chatBox.appendChild(botMessageElement);
+      }, 1000);
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    }
+  </script>
+</body>
+</html>
